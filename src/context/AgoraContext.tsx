@@ -814,7 +814,7 @@ export function AgoraProvider({ children }: { children: ReactNode }) {
 
     (async () => {
       try {
-        await fetch(`/api/jobs_take.php`, {
+        await fetch(`${API}/jobs_take.php`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
