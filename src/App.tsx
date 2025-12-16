@@ -1,0 +1,36 @@
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AgoraProvider } from "@/context/AgoraContext";
+import { LanguageProvider } from "@/context/LanguageContext";
+import Index from "./pages/Index";
+import Dashboard from "./pages/Dashboard";
+import Marketplace from "./pages/Marketplace";
+import NotFound from "./pages/NotFound";
+
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <LanguageProvider>
+      <AgoraProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/marketplace/:slug" element={<Marketplace />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </AgoraProvider>
+    </LanguageProvider>
+  </QueryClientProvider>
+);
+
+export default App;
