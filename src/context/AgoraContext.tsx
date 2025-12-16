@@ -581,14 +581,14 @@ export function AgoraProvider({ children }: { children: ReactNode }) {
           body: JSON.stringify({
             marketplaceId: Number(marketplaceId),
             userId: Number(userId),
-            role: 'PRODUCER',
+            status: 'APPROVED', // ✅ ВАЖНО
           }),
         });
       } catch (e) {
         console.error('approveProducer error', e);
       }
     })();
-
+  
     setMarketplaceUsers((prev) =>
       prev.map((mu) =>
         mu.userId === userId && mu.marketplaceId === marketplaceId
@@ -613,14 +613,14 @@ export function AgoraProvider({ children }: { children: ReactNode }) {
           body: JSON.stringify({
             marketplaceId: Number(marketplaceId),
             userId: Number(userId),
-            role: 'CUSTOMER',
+            status: 'REJECTED', // ✅ ВАЖНО
           }),
         });
       } catch (e) {
         console.error('rejectProducer error', e);
       }
     })();
-
+  
     setMarketplaceUsers((prev) =>
       prev.map((mu) =>
         mu.userId === userId && mu.marketplaceId === marketplaceId
@@ -633,7 +633,7 @@ export function AgoraProvider({ children }: { children: ReactNode }) {
           : mu
       )
     );
-  };
+  };  
 
   const registerAsProducer = (marketplaceId: string, description: string) => {
     if (!currentUser) return;
